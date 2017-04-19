@@ -1,30 +1,103 @@
-  .new-tweet {
-    background-color: #eee;
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #d0d0d0;
+.new-tweet {
+  background-color: #eee;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+}
+
+.new-tweet h2  {
+  border-bottom: 1px solid black;
+  margin:0 0 20px;
+}
+
+.new-tweet form {
+  position: relative;
+}
+.new-tweet textarea {
+  padding: 10px 5px;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.new-tweet .counter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.error {
+  color: red;
+}
+
+.tweet-container {
+   border-radius: 8px;
+   border: 1px solid #d0d0d0;
+   margin:10px 0 20px;
+}
+
+.tweet-container header {
+  background-color: #eee;
+  border-radius: 8px 8px 0 0;
+  padding: 10px;
+}
+
+.tweet-container .fullusername {
+  font-weight: bold;
+  vertical-align: top;
+  font-size: 18pt;
+}
+
+.tweet-container .shortusername {
+
+  margin-right: 5px;
+  color: #c4c4c4;
+  float: right;
+
+}
+
+.tweet-container .tweetlogo {
+  height: 64px;
+  width: 64px;
   }
 
-  .new-tweet h2  {
-    border-bottom: 1px solid black;
-    margin:0 0 20px;
+.tweet-container .tweets {
+  margin-left: 15px;
+  text-align: center;
+  min-height: 6em;
+  display: flex;
+  align-items: center;
+  font-size: 12pt;
+  font-weight: bold ;
   }
 
-  .new-tweet form {
-    position: relative;
-  }
-  .new-tweet textarea {
-    padding: 10px 5px;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-  }
+.tweet-container footer {
+  border-top: 1px solid #eee;
+  height: 40px;
+  font-size: 10pt;
+}
 
-  .new-tweet .counter {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
+.tweet-container footer p {
+  display: inline;
+  margin-left: 10px;
+}
 
+.tweet-container:hover {
+  opacity: 1;
+}
+
+.tweet-container {
+  opacity: .5;
+}
+
+.tweet-container:hover footer div {
+  opacity: 1;
+  display: inline;
+  float: right;
+}
+
+.tweet-container footer div {
+  opacity: 0;
+}
 
