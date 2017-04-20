@@ -6,61 +6,16 @@
  /* globals $, moment */
 $(function onReady() {
   const $tweets = $('#tweets');
-  const data = [
-  {
-    user: {
-      name: 'Newton',
-      avatars: {
-        'small': 'https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png',
-        'regular': 'https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png',
-        'large': 'https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png',
-      },
-      'handle': '@SirIsaac',
-    },
-    'content': {
-      'text': 'If I have seen further it is by standing on the shoulders of giants',
-    },
-    'created_at': 1461116232227,
-  },
-  {
-    'user': {
-      'name': 'Descartes',
-      'avatars': {
-        'small':   'https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png',
-        'regular': 'https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png',
-        'large':   'https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png',
-      },
-      'handle': '@rd' },
-      'content': {
-        'text': 'Je pense , donc je suis',
-      },
-      'created_at': 1461113959088,
-    },
-    {
-      'user': {
-        'name': 'Johann von Goethe',
-        'avatars': {
-          'small':   'https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png',
-          'regular': 'https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png',
-          'large':   'https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png',
-        },
-        'handle': '@johann49',
-      },
-      'content': {
-        'text': 'Es ist nichts schrecklicher als eine tätige Unwissenheit.',
-      },
-      'created_at': 1492571528528,
-    }
-    ];
+  const $textarea = $('textarea');
 
-    function template(tweet) {
+  function createTweetElement(tweet) {
       return `<article class="tweet-container">
           <header>
             <img class="tweetlogo" src="${tweet.user.avatars.small}">
-            <span class = "fullusername">${tweet.user.name}</span>
-            <span class = "shortusername">${tweet.user.handle}</span>
+            <span class="fullusername">${tweet.user.name}</span>
+            <span class="shortusername">${tweet.user.handle}</span>
           </header>
-          <span class = 'tweets'>${tweet.content.text}</span>
+          <span class='tweets'>${tweet.content.text}</span>
           <footer>
             <p>${tweet.created_at}</p>
               <div>
@@ -72,9 +27,72 @@ $(function onReady() {
         </article>`;
       }
 
+  function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+  }
+
   function enhanceWithTimeAgo(tweet) {
     return Object.assign({}, tweet, { created_at: moment(tweet.created_at).fromNow() });
   }
 
-  $tweets.append(data.map(enhanceWithTimeAgo).map(template));
+  function loadTweets(){
+    $.ajax({
+      url: '/tweets',
+      method: 'GET',
+      success: function(tweetMessage) {
+      renderTweets(tweetMessage.reverse());
+      }
+    });
+  }
+
+  function renderTweets(tweets) {
+    $tweets.html(tweets.map(enhanceWithTimeAgo).map(createTweetElement));
+  }
+
+  $('form').on('submit', function (event) {
+    event.preventDefault();
+
+    if ($textarea.val() && $textarea.val().length < 141){
+      var tweetcontent = $textarea.val();
+      tweetcontent = escape(tweetcontent).replace(/&/g, '%26');
+
+      $.ajax({
+        url: '/tweets',
+        method: 'POST',
+        data:`text=${tweetcontent}`,
+        // $(this).serialize(),  POST req Body
+        success: function(){
+          loadTweets();
+          $textarea.val('');
+          $textarea.trigger('input');
+        }
+      });
+    }
+    else if ($textarea.val()==''){
+      alert ("Can't submit an empty tweet")
+    }
+    else if ($textarea.val().length){
+      alert ("tweet is too long")
+    }
+
+  });
+  loadTweets();
+
+  //compose click toggle
+  $( "#compose" ).click(function() {
+      $( ".new-tweet" ).slideToggle( 200, function() {
+        $("textarea").focus();
+    });
+  });
+
 });
+
+
+
+
+
+
+
+
