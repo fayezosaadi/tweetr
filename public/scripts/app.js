@@ -18,11 +18,11 @@ $(function onReady() {
           <span class='tweets'>${tweet.content.text}</span>
           <footer>
             <p>${tweet.created_at}</p>
-              <div>
-            <i class="fa fa-flag" aria-hidden="true"></i>
-            <i class="fa fa-retweet" aria-hidden="true"></i>
-            <i class="fa fa-heart" aria-hidden="true"></i>
-              </div>
+            <div>
+              <i class="fa fa-flag" aria-hidden="true"></i>
+              <i class="fa fa-retweet" aria-hidden="true"></i>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            </div>
           </footer>
         </article>`;
   }
