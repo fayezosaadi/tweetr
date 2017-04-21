@@ -3,8 +3,8 @@ $(document).ready(function(){
   const $count = $('span.counter');
   const tweetMaxLength = 140;
 
-  $('.new-tweet').on('input', 'textarea', function() { // listens to the keyup event
-    var textLength = $(this).val().length;               // textarea char input
+  $('.new-tweet').on('input', 'textarea', function() {
+    var textLength = $(this).val().length;
     var remainingCharacters = tweetMaxLength - textLength;
     $count.text(remainingCharacters);
     if (remainingCharacters < 0) {
