@@ -25,7 +25,7 @@ $(function onReady() {
               </div>
           </footer>
         </article>`;
-      }
+  }
 
   function escape(str) {
   var div = document.createElement('div');
@@ -51,39 +51,36 @@ $(function onReady() {
     $tweets.html(tweets.map(enhanceWithTimeAgo).map(createTweetElement));
   }
 
-$('form').on('submit', function (event) {
-  event.preventDefault();
-  if ($textarea.val() && $textarea.val().length < 141){
-    var tweetcontent = $textarea.val();
-    tweetcontent = escape(tweetcontent).replace(/&/g, '%26');
+  $('form').on('submit', function (event) {
+    event.preventDefault();
+    if ($textarea.val() && $textarea.val().length < 141){
+      var tweetcontent = $textarea.val();
+      tweetcontent = escape(tweetcontent).replace(/&/g, '%26');
 
-    $.ajax({
-      url: '/tweets',
-      method: 'POST',
-      data:`text=${tweetcontent}`,
-      // $(this).serialize()
-      success: function(){
-        loadTweets();
-        $textarea.val('');
-        $textarea.trigger('input');
-      }
-    });
-  }
-  else if ($textarea.val()==''){
-    alert ("Can't submit an empty tweet")
-  }
-  else if ($textarea.val().length){
-    alert ("tweet is too long")
-  }
-});
-
-loadTweets();
-
-$( "#compose" ).click(function() {
-  $( ".new-tweet" ).slideToggle( 200, function() {
-    $("textarea").focus();
+      $.ajax({
+        url: '/tweets',
+        method: 'POST',
+        data:`text=${tweetcontent}`,
+        // $(this).serialize()
+        success: function(){
+          loadTweets();
+          $textarea.val('');
+          $textarea.trigger('input');
+        }
+      });
+    } else if ($textarea.val()=='') {
+      alert ("Can't submit an empty tweet")
+    } else if ($textarea.val().length){
+      alert ("tweet is too long")
+    }
   });
-});
+  loadTweets();
+
+  $( "#compose" ).click(function() {
+    $( ".new-tweet" ).slideToggle( 200, function() {
+      $("textarea").focus();
+    });
+  });
 });
 
 

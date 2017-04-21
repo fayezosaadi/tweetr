@@ -1,39 +1,39 @@
-  /*
-   * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-   * https://css-tricks.com/international-box-sizing-awareness-day/
-   * Do not modify these two selectors, please
-   */
-  html {
-    box-sizing: border-box;
-    height: 100%;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+/*
+ * http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+ * https://css-tricks.com/international-box-sizing-awareness-day/
+ * Do not modify these two selectors, please
+ */
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-  /*
-   * Global layout stuff
-   */
-  * {
-   font-family: 'Roboto Condensed', sans-serif;
-  }
+/*
+ * Global layout stuff
+ */
+* {
+ font-family: 'Roboto Condensed', sans-serif;
+}
 
 
-  body {
-    margin: 0;
-    color: #244751;
-    background-color: #eee;
-    height: 100%;
+body {
+  margin: 0;
+  color: #244751;
+  background-color: #eee;
+  height: 100%;
 
-  }
+}
 
-  /*
-   * Additional CSS can be defined below or in other CSS files, as per instructions
-   */
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ */
 
-   main {
-     margin: 80px auto 0px;
-     width: 450px;
-     background-color: #fff;
-     padding: 1em 2em;
-   }
+ main {
+   margin: 80px auto 0px;
+   width: 450px;
+   background-color: #fff;
+   padding: 1em 2em;
+ }
